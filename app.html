@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Seu mood tracker diário">
+
+        <title>Moody</title>
+
+        <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Moody&#x1F603;</h1>
+        </header>
+
+        <main>
+            <section class="boas-vindas">
+                <p>Bom dia, Nathália!</p>
+
+                <h2>Como você está se sentindo hoje?</h2>
+
+                <p>22 de setembro de 2026</p>
+
+                <button type="button">Fazer Check-in</button>
+            </section>
+
+            <section class="cards">
+                <article class="card card-humor">
+                    <h2>Seu humor da semana</h2>
+                    <span class="humor-emoji">😃</span>
+                    <p class="humor-semana">Ótimo</p>
+                    <p>dos últimos 5 check-ins</p>
+                </article>
+
+                <article class="card card-diario">
+                    <h2>Como foi seu dia?</h2>
+                    <p>Escreva o que sentiu em seu diário</p>
+                    <a href="#diario">Ir para diário</a>
+                </article>
+            </section>
+
+            <section id="diario">
+                <div class="escrever-diario">
+                    <h2>Seu diário</h2>
+
+                    <label for="texto-diario">Como foi seu dia?</label>
+                    <textarea name="texto-diario" id="texto-diario"></textarea>
+                    
+                    <button type="button">Salvar</button>
+                </div>
+
+                <div class="historico-diario">
+                    <h3>Entradas anteriores</h3>
+
+                    <article>
+                        <time datetime="2026-09-22">22 de setembro de 2026</time>
+                        <p>Texto de exemplo da entrada do diário nesse dia...</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="grafico">
+                <h2>Tendência de humor e sono</h2>
+
+                <div class="grafico-container">
+                    <ul class="eixo-horas">
+                        <li>9+ horas</li>
+                        <li>7-8h</li>
+                        <li>5-6h</li>
+                        <li>3-4h</li>
+                        <li>0-2h</li>
+                    </ul>
+
+                    <div class="grafico-scroll">
+                        <div class="grafico-barras">
+                            <div class="dia">
+                                <div class="barra"></div>
+                                <time datetime="2026-09-22" class="data">22 Set</time>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <dialog id="modal-checkin">
+            <button type="button" aria-label="Fechar">x</button>
+
+            <div class="tela">
+                <h2>Como está seu humor hoje?</h2>
+
+                <ul class="opcoes-humor">
+                    <li><button type="button">Ótimo &#x1F603;</button></li>
+                    <li><button type="button">Bom  &#X1F642;</button></li>
+                    <li><button type="button">Neutro &#x1F610;</button></li>
+                    <li><button type="button">Ruim &#x1F61E;</button></li>
+                    <li><button type="button">Péssimo &#x1F62D;</button></li>
+                </ul>
+
+                <button type="button" class="btn-avancar">Avançar</button>
+            </div>
+
+            <div class="tela escondida">
+                <h2>Quantas horas você dormiu?</h2>
+
+                <ul class="opcoes-horas">
+                    <li><button type="button">0-2h</button></li>
+                    <li><button type="button">3-4h</button></li>
+                    <li><button type="button">5-6h</button></li>
+                    <li><button type="button">7-8h</button></li>
+                    <li><button type="button">+9h</button></li>
+                </ul>
+
+                <button type="button" class="btn-salvar">Salvar</button>
+            </div>
+        </dialog>
+
+        <script src="script.js"></script>
+    </body>
+</html>
