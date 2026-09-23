@@ -45,10 +45,20 @@ const tela1 = document.querySelector('.tela');
 const tela2 = document.querySelector('.tela.escondida');
 const btnAvancar = document.querySelector('.btn-avancar')
 const opcoesHumor = document.querySelectorAll('.opcao-humor');
+const opcoesHoras = document.querySelectorAll('.opcao-horas');
 
 opcoesHumor.forEach((botao) => {
     botao.addEventListener('click', () => {
         opcoesHumor.forEach((btn) => {
+            btn.classList.remove('selecionado');
+        });
+        botao.classList.add('selecionado');
+    });
+});
+
+opcoesHoras.forEach((botao) => {
+    botao.addEventListener('click', () => {
+        opcoesHoras.forEach((btn) => {
             btn.classList.remove('selecionado');
         });
         botao.classList.add('selecionado');
