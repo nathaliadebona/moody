@@ -108,35 +108,35 @@
             </section>
         </main>
 
-        <dialog id="modal-checkin">
-            <button type="button" aria-label="Fechar">x</button>
+        <dialog id="modal-checkin" open>
+            <button type="button" aria-label="Fechar" class="btn-fechar">x</button>
 
             <div class="tela">
                 <h2>Como está seu humor hoje?</h2>
 
                 <ul class="opcoes-humor">
-                    <li><button type="button">Ótimo &#x1F603;</button></li>
-                    <li><button type="button">Bom  &#X1F642;</button></li>
-                    <li><button type="button">Neutro &#x1F610;</button></li>
-                    <li><button type="button">Ruim &#x1F61E;</button></li>
-                    <li><button type="button">Péssimo &#x1F62D;</button></li>
+                    <li><button type="button" class="opcao-humor otimo">Ótimo 😃</button></li>
+                    <li><button type="button" class="opcao-humor bom">Bom 🙂</button></li>
+                    <li><button type="button" class="opcao-humor neutro">Neutro 😐</button></li>
+                    <li><button type="button" class="opcao-humor ruim">Ruim 😞</button></li>
+                    <li><button type="button" class="opcao-humor pessimo">Péssimo 😭</button></li>
                 </ul>
 
-                <button type="button" class="btn-avancar">Avançar</button>
+                <button type="button" class="btn-avancar btn-primario">Avançar</button>
             </div>
 
             <div class="tela escondida">
                 <h2>Quantas horas você dormiu?</h2>
 
                 <ul class="opcoes-horas">
-                    <li><button type="button">0-2h</button></li>
-                    <li><button type="button">3-4h</button></li>
-                    <li><button type="button">5-6h</button></li>
-                    <li><button type="button">7-8h</button></li>
-                    <li><button type="button">+9h</button></li>
+                    <li><button type="button" class="opcao-horas">0-2h</button></li>
+                    <li><button type="button" class="opcao-horas">3-4h</button></li>
+                    <li><button type="button" class="opcao-horas">5-6h</button></li>
+                    <li><button type="button" class="opcao-horas">7-8h</button></li>
+                    <li><button type="button" class="opcao-horas">+9h</button></li>
                 </ul>
 
-                <button type="button" class="btn-salvar">Salvar</button>
+                <button type="button" class="btn-salvar btn-primario">Salvar</button>
             </div>
         </dialog>
 
