@@ -22,27 +22,31 @@
 
         <main>
             <section class="boas-vindas">
-                <p>Bom dia, Nathália!</p>
+                <p class="saudacao">Bom dia, Nathália!</p>
 
                 <h2>Como você está se sentindo hoje?</h2>
 
-                <p>22 de setembro de 2026</p>
+                <p class="data-atual">22 de setembro de 2026</p>
 
-                <button type="button">Fazer Check-in</button>
+                <button type="button" class="btn-primario">Fazer Check-in</button>
             </section>
 
             <section class="cards">
                 <article class="card card-humor">
                     <h2>Seu humor da semana</h2>
-                    <span class="humor-emoji">😃</span>
-                    <p class="humor-semana">Ótimo</p>
-                    <p>dos últimos 5 check-ins</p>
+
+                    <div class="humor-resultado">
+                        <span class="humor-emoji">😃</span>
+                        <p class="humor-semana">Ótimo</p>
+                    </div>
+
+                    <p class="ultimos-checkins">dos últimos 5 check-ins</p>
                 </article>
 
                 <article class="card card-diario">
                     <h2>Como foi seu dia?</h2>
                     <p>Escreva o que sentiu em seu diário</p>
-                    <a href="#diario">Ir para diário</a>
+                    <a href="#diario" class="btn-secundario">Ir para diário</a>
                 </article>
             </section>
 
@@ -50,19 +54,31 @@
                 <div class="escrever-diario">
                     <h2>Seu diário</h2>
 
-                    <label for="texto-diario">Como foi seu dia?</label>
+                    <label for="texto-diario" class="sr-only">Como foi seu dia?</label>
                     <textarea name="texto-diario" id="texto-diario"></textarea>
                     
-                    <button type="button">Salvar</button>
+                    <button type="button" class="btn-secundario">Salvar</button>
                 </div>
 
                 <div class="historico-diario">
                     <h3>Entradas anteriores</h3>
 
-                    <article>
-                        <time datetime="2026-09-22">22 de setembro de 2026</time>
-                        <p>Texto de exemplo da entrada do diário nesse dia...</p>
-                    </article>
+                    <label for="filtro-mes" class="sr-only">Filtrar por mês</label>
+                    <input type="month" id="filtro-mes" name="filtro-mes">
+
+                    <div class="lista-entradas">
+                        <article>
+                            <time datetime="2026-09-22">22 de setembro de 2026</time>
+                            <p>Texto de exemplo da entrada do diário nesse dia...</p>
+                        </article>
+
+                        <article>
+                            <time datetime="2026-09-22">22 de setembro de 2026</time>
+                            <p>Texto de exemplo da entrada do diário nesse dia...</p>
+                        </article>
+                    </div>
+
+                    <button type="button" class="ver-mais">Ver mais</button>
                 </div>
             </section>
 
@@ -81,8 +97,10 @@
                     <div class="grafico-scroll">
                         <div class="grafico-barras">
                             <div class="dia">
-                                <div class="barra"></div>
-                                <time datetime="2026-09-22" class="data">22 Set</time>
+                                <div class="barra-track">
+                                    <div class="barra"></div>
+                                </div>
+                                <span class="data">22 Set</span>
                             </div>
                         </div>
                     </div>
