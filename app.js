@@ -1,9 +1,9 @@
+// ---- Saudação ---- //
 const nome = localStorage.getItem('nome');
 const agora = new Date();
 const horaAtual = agora.getHours();
 const saudacao = document.querySelector('.saudacao');
 
-// ---- Saudação ---- //
 if (horaAtual < 12) {
     saudacao.textContent = `Bom dia, ${nome}!`;
 } else if (horaAtual >= 12 && horaAtual < 18) {
@@ -12,7 +12,7 @@ if (horaAtual < 12) {
     saudacao.textContent = `Boa noite, ${nome}!`;
 }
 
-// ---- Dia atual ----// 
+// ---- Dia atual ---- // 
 const dataFormatada = agora.toLocaleDateString('pt-BR', {
     day: 'numeric',
     month: 'long',
@@ -36,3 +36,36 @@ function salvarCheckIn(novoCheckIn) {
 
     localStorage.setItem('checkIns', JSON.stringify(checkIns)); 
 }
+
+// ---- Modal check-in ---- //
+const modalCheckin = document.getElementById('modal-checkin');
+const btnAbrirCheckin = document.getElementById('btn-abrir-checkin');
+const btnfecharCheckin = document.getElementById('btn-fechar-checkin'); 
+const tela1 = document.querySelector('.tela');
+const tela2 = document.querySelector('.tela.escondida');
+const btnAvancar = document.querySelector('.btn-avancar')
+const opcoesHumor = document.querySelectorAll('.opcao-humor');
+
+opcoesHumor.forEach((botao) => {
+    botao.addEventListener('click', () => {
+        opcoesHumor.forEach((btn) => {
+            btn.classList.remove('selecionado');
+        });
+        botao.classList.add('selecionado');
+    });
+});
+
+btnAbrirCheckin.addEventListener('click', () => {
+    modalCheckin.showModal();
+});
+
+btnfecharCheckin.addEventListener('click', () => {
+    modalCheckin.close();
+});
+
+btnAvancar.addEventListener('click', () => {
+    tela1.classList.add('escondida');
+    tela2.classList.remove('escondida');
+});
+
+
