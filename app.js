@@ -44,6 +44,7 @@ const btnfecharCheckin = document.getElementById('btn-fechar-checkin');
 const tela1 = document.querySelector('.tela');
 const tela2 = document.querySelector('.tela.escondida');
 const btnAvancar = document.querySelector('.btn-avancar')
+const btnSalvarCheckin = document.querySelector('.btn-salvar');
 const opcoesHumor = document.querySelectorAll('.opcao-humor');
 const opcoesHoras = document.querySelectorAll('.opcao-horas');
 
@@ -78,4 +79,32 @@ btnAvancar.addEventListener('click', () => {
     tela2.classList.remove('escondida');
 });
 
+btnSalvarCheckin.addEventListener('click', () => {
+    const botaoHumorSelecionado = document.querySelector('.opcao-humor.selecionado');
+    const humorEscolhido = botaoHumorSelecionado.dataset.humor;
 
+    const botaoHorasSelecionado = document.querySelector('.opcao-horas.selecionado');
+    const horasEscolhidas = botaoHorasSelecionado.dataset.horas;
+
+    const dataHoje = agora.toISOString().slice(0, 10);
+
+    const novoCheckIn = {
+        data: dataHoje,
+        humor: humorEscolhido,
+        horasDormidas: horasEscolhidas
+    };
+
+    salvarCheckIn(novoCheckIn);
+
+    modalCheckin.close();
+    tela1.classList.remove('escondida');
+    tela2.classList.add('escondida');
+
+    opcoesHumor.forEach((botao) => {
+        botao.classList.remove('selecionado');
+    });
+
+    opcoesHoras.forEach((botao) => {
+        botao.classList.remove('selecionado');
+    });
+});
