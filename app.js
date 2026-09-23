@@ -22,3 +22,17 @@ const dataFormatada = agora.toLocaleDateString('pt-BR', {
 const dataAtual = document.querySelector('.data-atual');
 dataAtual.textContent = dataFormatada;
 
+
+// ---- Check-in ---- //
+function buscarCheckIns() {
+    const dados = localStorage.getItem('checkIns');
+    return JSON.parse(dados) || [];
+}
+
+function salvarCheckIn(novoCheckIn) {
+    const checkIns = buscarCheckIns(); 
+
+    checkIns.push(novoCheckIn); 
+
+    localStorage.setItem('checkIns', JSON.stringify(checkIns)); 
+}
