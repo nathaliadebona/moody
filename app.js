@@ -95,7 +95,7 @@ btnSalvarCheckin.addEventListener('click', () => {
     };
 
     salvarCheckIn(novoCheckIn);
-    atualizarCardHumor();
+    atualizarHumorPredominante();
 
     modalCheckin.close();
     tela1.classList.remove('escondida');
@@ -111,7 +111,7 @@ btnSalvarCheckin.addEventListener('click', () => {
 });
 
 // ---- Card humor predominante ---- //
-function atualizarCardHumor() {
+function atualizarHumorPredominante() {
     const todosCheckIns = buscarCheckIns();
     const ultimosCinco = todosCheckIns.slice(-5);
     const humorEmoji = document.querySelector('.humor-emoji');
@@ -131,21 +131,22 @@ function atualizarCardHumor() {
         const humorPredominante = entradas[0][0];
 
         const infoHumores = { 
-            otimo: { emoji: "😃", texto: "Ótimo" },
-            bom: { emoji: "🙂", texto: "Bom" },
-            neutro: { emoji: "😐", texto: "Neutro" },
-            ruim: { emoji: "😞", texto: "Ruim" },
-            pessimo: { emoji: "😭", texto: "Péssimo" }
+            otimo: { emoji: "😃", texto: "Ótimo", corFundo: "var(--cor-humor-otimo-fundo)" },
+            bom: { emoji: "🙂", texto: "Bom", corFundo: "var(--cor-humor-bom-fundo)" },
+            neutro: { emoji: "😐", texto: "Neutro", corFundo: "var(--cor-humor-neutro-fundo)" },
+            ruim: { emoji: "😞", texto: "Ruim", corFundo: "var(--cor-humor-ruim-fundo)" },
+            pessimo: { emoji: "😭", texto: "Péssimo", corFundo: "var(--cor-humor-pessimo-fundo)" }
         };
 
         const infoDoPredominante = infoHumores[humorPredominante];
 
         humorEmoji.textContent = infoDoPredominante.emoji;
         humorSemana.textContent = infoDoPredominante.texto;
+        document.body.style.backgroundColor = infoDoPredominante.corFundo;
     } else {
         humorEmoji.textContent = '';
         humorSemana.textContent = 'Faça seu primeiro check-in!';
+        document.body.style.backgroundColor = 'var(--cor-fundo-base)';
     }
 }
-
-atualizarCardHumor();
+atualizarHumorPredominante();
