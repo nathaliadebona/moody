@@ -149,7 +149,7 @@ function atualizarHumorPredominante() {
         document.body.style.backgroundColor = 'var(--cor-fundo-base)';
     }
 }
-atualizarHumorPredominante();
+
 
 // ---- Diário ---- //
 const textoDiario = document.getElementById('texto-diario');
@@ -168,6 +168,33 @@ function salvarEntradaDiario(novaEntrada) {
     localStorage.setItem('entradasDiario', JSON.stringify(entradasDiario)); 
 }
 
+function criarElementoEntrada(entrada) {
+    const article = document.createElement('article');
+    const time = document.createElement('time');
+    const paragrafo = document.createElement('p');
+
+    time.setAttribute('datetime', entrada.data);
+    time.textContent = entrada.data; 
+    paragrafo.textContent = entrada.texto;
+
+    article.appendChild(time);
+    article.appendChild(paragrafo);
+
+    return article;
+}
+
+function exibirHistoricoDiario() {
+    const listaEntradas = document.querySelector('.lista-entradas');
+    const entradas = buscarEntradasDiario();
+
+    listaEntradas.innerHTML = '';
+
+    entradas.forEach((entrada) => {
+        const article = criarElementoEntrada(entrada);
+        listaEntradas.appendChild(article);
+    });
+}
+
 btnSalvarDiario.addEventListener('click', () => {
     const dataHoje = agora.toISOString().slice(0, 10);
     const novoDiario = {
@@ -177,4 +204,9 @@ btnSalvarDiario.addEventListener('click', () => {
 
     salvarEntradaDiario(novoDiario);
     textoDiario.value = '';
+
+    exibirHistoricoDiario();
 });
+
+atualizarHumorPredominante();
+exibirHistoricoDiario();
