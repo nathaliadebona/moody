@@ -150,3 +150,31 @@ function atualizarHumorPredominante() {
     }
 }
 atualizarHumorPredominante();
+
+// ---- Diário ---- //
+const textoDiario = document.getElementById('texto-diario');
+const btnSalvarDiario = document.getElementById('btn-salvar-diario');
+
+function buscarEntradasDiario() {
+    const dados = localStorage.getItem('entradasDiario');
+    return JSON.parse(dados) || [];
+}
+
+function salvarEntradaDiario(novaEntrada) {
+    const entradasDiario = buscarEntradasDiario();
+    
+    entradasDiario.push(novaEntrada);
+
+    localStorage.setItem('entradasDiario', JSON.stringify(entradasDiario)); 
+}
+
+btnSalvarDiario.addEventListener('click', () => {
+    const dataHoje = agora.toISOString().slice(0, 10);
+    const novoDiario = {
+        texto: textoDiario.value,
+        data: dataHoje
+    }
+
+    salvarEntradaDiario(novoDiario);
+    textoDiario.value = '';
+});
