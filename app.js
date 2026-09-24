@@ -154,6 +154,8 @@ function atualizarHumorPredominante() {
 // ---- Diário ---- //
 const textoDiario = document.getElementById('texto-diario');
 const btnSalvarDiario = document.getElementById('btn-salvar-diario');
+const btnVerMais = document.querySelector('.ver-mais');
+let quantidadeVisivel = 5;
 
 function buscarEntradasDiario() {
     const dados = localStorage.getItem('entradasDiario');
@@ -193,10 +195,18 @@ function exibirHistoricoDiario() {
 
     listaEntradas.innerHTML = '';
 
-    entradas.forEach((entrada) => {
+    const entradasVisiveis = entradas.slice(0, quantidadeVisivel);
+
+    entradasVisiveis.forEach((entrada) => {
         const article = criarElementoEntrada(entrada);
         listaEntradas.appendChild(article);
     });
+
+    if (quantidadeVisivel >= entradas.length) {
+        btnVerMais.style.display = 'none';
+    } else {
+        btnVerMais.style.display = 'block';
+    }
 }
 
 btnSalvarDiario.addEventListener('click', () => {
@@ -209,6 +219,11 @@ btnSalvarDiario.addEventListener('click', () => {
     salvarEntradaDiario(novoDiario);
     textoDiario.value = '';
 
+    exibirHistoricoDiario();
+});
+
+btnVerMais.addEventListener('click', () => {
+    quantidadeVisivel += 5;
     exibirHistoricoDiario();
 });
 
