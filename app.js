@@ -180,6 +180,10 @@ function criarElementoEntrada(entrada) {
     article.appendChild(time);
     article.appendChild(paragrafo);
 
+    article.addEventListener('click', () => {
+        paragrafo.classList.toggle('expandido');
+    });
+
     return article;
 }
 
