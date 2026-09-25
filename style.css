@@ -52,6 +52,9 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+}
+
+main.app {
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -531,7 +534,7 @@ dialog::backdrop {
 }
 
 @media (min-width: 1024px) {
-    main {
+    main.app {
         padding: 0 3rem;
     }
 
