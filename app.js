@@ -154,6 +154,7 @@ function atualizarHumorPredominante() {
 // ---- Diário ---- //
 const textoDiario = document.getElementById('texto-diario');
 const btnSalvarDiario = document.getElementById('btn-salvar-diario');
+const filtroMes = document.getElementById('filtro-mes');
 const btnVerMais = document.querySelector('.ver-mais');
 let quantidadeVisivel = 5;
 
@@ -193,16 +194,26 @@ function exibirHistoricoDiario() {
     const listaEntradas = document.querySelector('.lista-entradas');
     const entradas = buscarEntradasDiario();
 
+    let entradasParaExibir;
+
+    if (filtroMes.value === '') {
+        entradasParaExibir = entradas;
+    } else {
+        entradasParaExibir = entradas.filter((entrada) => {
+            return entrada.data.startsWith(filtroMes.value);
+        });
+    }
+
     listaEntradas.innerHTML = '';
 
-    const entradasVisiveis = entradas.slice(0, quantidadeVisivel);
+    const entradasVisiveis = entradasParaExibir.slice(0, quantidadeVisivel);
 
     entradasVisiveis.forEach((entrada) => {
         const article = criarElementoEntrada(entrada);
         listaEntradas.appendChild(article);
     });
 
-    if (quantidadeVisivel >= entradas.length) {
+    if (quantidadeVisivel >= entradasParaExibir.length) {
         btnVerMais.style.display = 'none';
     } else {
         btnVerMais.style.display = 'block';
@@ -224,6 +235,11 @@ btnSalvarDiario.addEventListener('click', () => {
 
 btnVerMais.addEventListener('click', () => {
     quantidadeVisivel += 5;
+    exibirHistoricoDiario();
+});
+
+filtroMes.addEventListener('change', () => {
+    quantidadeVisivel = 5;
     exibirHistoricoDiario();
 });
 
