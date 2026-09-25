@@ -218,10 +218,14 @@ function exibirHistoricoDiario() {
         listaEntradas.appendChild(article);
     });
 
-    if (quantidadeVisivel >= entradasParaExibir.length) {
-        btnVerMais.style.display = 'none';
-    } else {
+    if (quantidadeVisivel < entradasParaExibir.length) {
         btnVerMais.style.display = 'block';
+        btnVerMais.textContent = 'Ver mais';
+    } else if (quantidadeVisivel >= entradasParaExibir.length && quantidadeVisivel > 5) {
+        btnVerMais.style.display = 'block';
+        btnVerMais.textContent = 'Ver menos';
+    } else {
+        btnVerMais.style.display = 'none'
     }
 }
 
@@ -239,7 +243,11 @@ btnSalvarDiario.addEventListener('click', () => {
 });
 
 btnVerMais.addEventListener('click', () => {
-    quantidadeVisivel += 5;
+    if (btnVerMais.textContent === 'Ver mais') {
+        quantidadeVisivel += 5;
+    } else {
+        quantidadeVisivel -= 5;
+    }
     exibirHistoricoDiario();
 });
 
