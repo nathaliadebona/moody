@@ -39,11 +39,16 @@ function buscarCheckIns() {
 }
 
 function salvarCheckIn(novoCheckIn) {
-    const checkIns = buscarCheckIns(); 
+    const checkIns = buscarCheckIns();
+    const indiceExistente = checkIns.findIndex((checkIn) => checkIn.data === novoCheckIn.data);
 
-    checkIns.push(novoCheckIn); 
+    if (indiceExistente !== -1) {
+        checkIns.splice(indiceExistente, 1, novoCheckIn);
+    } else {
+        checkIns.push(novoCheckIn);
+    }
 
-    localStorage.setItem('checkIns', JSON.stringify(checkIns)); 
+    localStorage.setItem('checkIns', JSON.stringify(checkIns));
 }
 
 // ---- Modal check-in ---- //
@@ -105,6 +110,7 @@ btnSalvarCheckin.addEventListener('click', () => {
 
     salvarCheckIn(novoCheckIn);
     atualizarHumorPredominante();
+    exibirGrafico();
 
     modalCheckin.close();
     tela1.classList.remove('escondida');
