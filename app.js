@@ -176,13 +176,18 @@ function criarElementoEntrada(entrada, indice) {
     const article = document.createElement('article');
     const time = document.createElement('time');
     const paragrafo = document.createElement('p');
+    const btnExcluir = document.createElement('button');
 
     time.setAttribute('datetime', entrada.data);
     time.textContent = entrada.data; 
     paragrafo.textContent = entrada.texto;
 
+    btnExcluir.textContent = 'Excluir';
+    btnExcluir.classList.add('btn-excluir');
+
     article.appendChild(time);
     article.appendChild(paragrafo);
+    article.appendChild(btnExcluir);
 
     if (indice % 2 === 0) {
         article.classList.add('roxo');
@@ -190,6 +195,12 @@ function criarElementoEntrada(entrada, indice) {
 
     article.addEventListener('click', () => {
         paragrafo.classList.toggle('expandido');
+    });
+
+    btnExcluir.addEventListener('click', (event) => {
+        event.stopPropagation();
+        excluirEntradaDiario(entrada.id);
+        exibirHistoricoDiario();
     });
 
     return article;
@@ -229,11 +240,20 @@ function exibirHistoricoDiario() {
     }
 }
 
+function excluirEntradaDiario(idParaExcluir) {
+    const entradas = buscarEntradasDiario();
+    const entradasFiltradas = entradas.filter((entrada) => {
+        return entrada.id !== idParaExcluir;
+    });
+    localStorage.setItem('entradasDiario', JSON.stringify(entradasFiltradas));
+}
+
 btnSalvarDiario.addEventListener('click', () => {
     const dataHoje = agora.toISOString().slice(0, 10);
     const novoDiario = {
         texto: textoDiario.value,
-        data: dataHoje
+        data: dataHoje,
+        id: Date.now()
     }
 
     salvarEntradaDiario(novoDiario);
