@@ -24,14 +24,13 @@ dataAtual.textContent = dataFormatada;
 
 
 // ---- Check-in ---- //
-
-    const infoHumores = {
-        otimo: { emoji: "😃", texto: "Ótimo", corFundo: "var(--cor-humor-otimo-fundo)", corBarra: "var(--cor-humor-otimo)" },
-        bom: { emoji: "🙂", texto: "Bom", corFundo: "var(--cor-humor-bom-fundo)", corBarra: "var(--cor-humor-bom)" },
-        neutro: { emoji: "😐", texto: "Neutro", corFundo: "var(--cor-humor-neutro-fundo)", corBarra: "var(--cor-humor-neutro)" },
-        ruim: { emoji: "😞", texto: "Ruim", corFundo: "var(--cor-humor-ruim-fundo)", corBarra: "var(--cor-humor-ruim)" },
-        pessimo: { emoji: "😭", texto: "Péssimo", corFundo: "var(--cor-humor-pessimo-fundo)", corBarra: "var(--cor-humor-pessimo)" }
-    };
+const infoHumores = {
+    otimo: { emoji: "😃", texto: "Ótimo", corFundo: "var(--cor-humor-otimo-fundo)", corBarra: "var(--cor-humor-otimo)" },
+    bom: { emoji: "🙂", texto: "Bom", corFundo: "var(--cor-humor-bom-fundo)", corBarra: "var(--cor-humor-bom)" },
+    neutro: { emoji: "😐", texto: "Neutro", corFundo: "var(--cor-humor-neutro-fundo)", corBarra: "var(--cor-humor-neutro)" },
+    ruim: { emoji: "😞", texto: "Ruim", corFundo: "var(--cor-humor-ruim-fundo)", corBarra: "var(--cor-humor-ruim)" },
+    pessimo: { emoji: "😭", texto: "Péssimo", corFundo: "var(--cor-humor-pessimo-fundo)", corBarra: "var(--cor-humor-pessimo)" }
+};
 
 function buscarCheckIns() {
     const dados = localStorage.getItem('checkIns');
@@ -164,6 +163,7 @@ const btnSalvarDiario = document.getElementById('btn-salvar-diario');
 const filtroMes = document.getElementById('filtro-mes');
 const btnVerMais = document.querySelector('.ver-mais');
 let quantidadeVisivel = 5;
+let idEmEdicao = null;
 
 function buscarEntradasDiario() {
     const dados = localStorage.getItem('entradasDiario');
@@ -183,6 +183,7 @@ function criarElementoEntrada(entrada, indice) {
     const time = document.createElement('time');
     const paragrafo = document.createElement('p');
     const btnExcluir = document.createElement('button');
+    const btnEditar = document.createElement('button');
 
     time.setAttribute('datetime', entrada.data);
     time.textContent = entrada.data; 
@@ -191,9 +192,13 @@ function criarElementoEntrada(entrada, indice) {
     btnExcluir.textContent = 'Excluir';
     btnExcluir.classList.add('btn-excluir');
 
+    btnEditar.textContent = 'Editar';
+    btnEditar.classList.add('btn-editar');
+
     article.appendChild(time);
     article.appendChild(paragrafo);
     article.appendChild(btnExcluir);
+    article.appendChild(btnEditar);
 
     if (indice % 2 === 0) {
         article.classList.add('roxo');
@@ -207,6 +212,12 @@ function criarElementoEntrada(entrada, indice) {
         event.stopPropagation();
         excluirEntradaDiario(entrada.id);
         exibirHistoricoDiario();
+    });
+
+    btnEditar.addEventListener('click', (event) => {
+        event.stopPropagation();
+        textoDiario.value = entrada.texto;
+        idEmEdicao = entrada.id;
     });
 
     return article;
@@ -254,17 +265,30 @@ function excluirEntradaDiario(idParaExcluir) {
     localStorage.setItem('entradasDiario', JSON.stringify(entradasFiltradas));
 }
 
+function atualizarEntradaDiario(idParaAtualizar, novoTexto) {
+    const entradas = buscarEntradasDiario();
+    const indiceExistente = entradas.findIndex((entrada) => entrada.id === idParaAtualizar);
+
+    entradas[indiceExistente].texto = novoTexto;
+
+    localStorage.setItem('entradasDiario', JSON.stringify(entradas));
+}
+
 btnSalvarDiario.addEventListener('click', () => {
-    const dataHoje = agora.toISOString().slice(0, 10);
-    const novoDiario = {
-        texto: textoDiario.value,
-        data: dataHoje,
-        id: Date.now()
+    if (idEmEdicao !== null) {
+        atualizarEntradaDiario(idEmEdicao, textoDiario.value);
+        idEmEdicao = null;
+    } else {
+        const dataHoje = agora.toISOString().slice(0, 10);
+        const novoDiario = {
+            texto: textoDiario.value,
+            data: dataHoje,
+            id: Date.now()
+        }
+        salvarEntradaDiario(novoDiario);
     }
 
-    salvarEntradaDiario(novoDiario);
     textoDiario.value = '';
-
     exibirHistoricoDiario();
 });
 
