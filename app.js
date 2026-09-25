@@ -172,7 +172,7 @@ function salvarEntradaDiario(novaEntrada) {
     localStorage.setItem('entradasDiario', JSON.stringify(entradasDiario)); 
 }
 
-function criarElementoEntrada(entrada) {
+function criarElementoEntrada(entrada, indice) {
     const article = document.createElement('article');
     const time = document.createElement('time');
     const paragrafo = document.createElement('p');
@@ -183,6 +183,10 @@ function criarElementoEntrada(entrada) {
 
     article.appendChild(time);
     article.appendChild(paragrafo);
+
+    if (indice % 2 === 0) {
+        article.classList.add('roxo');
+    }
 
     article.addEventListener('click', () => {
         paragrafo.classList.toggle('expandido');
@@ -209,8 +213,8 @@ function exibirHistoricoDiario() {
 
     const entradasVisiveis = entradasParaExibir.slice(0, quantidadeVisivel);
 
-    entradasVisiveis.forEach((entrada) => {
-        const article = criarElementoEntrada(entrada);
+    entradasVisiveis.forEach((entrada, indice) => {
+        const article = criarElementoEntrada(entrada, indice);
         listaEntradas.appendChild(article);
     });
 

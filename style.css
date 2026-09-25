@@ -318,8 +318,15 @@ section#diario {
 }
 
 .lista-entradas article {
+    margin-bottom: 0.5rem;
     padding: 1rem 0;
     border-bottom: 0.0625rem solid var(--cor-bordas);
+    border-left: 4px solid var(--cor-destaque-secundaria);
+    padding-left: 1rem;
+}
+
+.lista-entradas article.roxo {
+    border-left-color: var(--cor-destaque);
 }
 
 .lista-entradas article:last-child {
