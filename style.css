@@ -365,8 +365,17 @@ section#grafico {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    padding: 0 1.5rem;
-    padding-bottom: 3rem;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border-radius: 2rem;
+    background-color: var(--cor-branco);
+}
+
+section#grafico h2 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-destaque);
+    font-size: 2rem;
+    text-align: center;
 }
 
 .grafico-container {
