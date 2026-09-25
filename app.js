@@ -24,6 +24,15 @@ dataAtual.textContent = dataFormatada;
 
 
 // ---- Check-in ---- //
+
+    const infoHumores = {
+        otimo: { emoji: "😃", texto: "Ótimo", corFundo: "var(--cor-humor-otimo-fundo)", corBarra: "var(--cor-humor-otimo)" },
+        bom: { emoji: "🙂", texto: "Bom", corFundo: "var(--cor-humor-bom-fundo)", corBarra: "var(--cor-humor-bom)" },
+        neutro: { emoji: "😐", texto: "Neutro", corFundo: "var(--cor-humor-neutro-fundo)", corBarra: "var(--cor-humor-neutro)" },
+        ruim: { emoji: "😞", texto: "Ruim", corFundo: "var(--cor-humor-ruim-fundo)", corBarra: "var(--cor-humor-ruim)" },
+        pessimo: { emoji: "😭", texto: "Péssimo", corFundo: "var(--cor-humor-pessimo-fundo)", corBarra: "var(--cor-humor-pessimo)" }
+    };
+
 function buscarCheckIns() {
     const dados = localStorage.getItem('checkIns');
     return JSON.parse(dados) || [];
@@ -130,14 +139,6 @@ function atualizarHumorPredominante() {
 
         const humorPredominante = entradas[0][0];
 
-        const infoHumores = { 
-            otimo: { emoji: "😃", texto: "Ótimo", corFundo: "var(--cor-humor-otimo-fundo)" },
-            bom: { emoji: "🙂", texto: "Bom", corFundo: "var(--cor-humor-bom-fundo)" },
-            neutro: { emoji: "😐", texto: "Neutro", corFundo: "var(--cor-humor-neutro-fundo)" },
-            ruim: { emoji: "😞", texto: "Ruim", corFundo: "var(--cor-humor-ruim-fundo)" },
-            pessimo: { emoji: "😭", texto: "Péssimo", corFundo: "var(--cor-humor-pessimo-fundo)" }
-        };
-
         const infoDoPredominante = infoHumores[humorPredominante];
 
         humorEmoji.textContent = infoDoPredominante.emoji;
@@ -243,5 +244,64 @@ filtroMes.addEventListener('change', () => {
     exibirHistoricoDiario();
 });
 
+// ---- Gráfico ---- //
+const graficoBarras = document.querySelector('.grafico-barras');
+const alturaPorHoras = {
+    "0-2": "0%",
+    "3-4": "20%",
+    "5-6": "40%",
+    "7-8": "60%",
+    "9": "80%"
+};
+
+function exibirGrafico() {
+    const checkIns = buscarCheckIns();
+
+    graficoBarras.innerHTML = '';
+
+    checkIns.forEach((checkIn) => {
+        const dia = criarElementoDia(checkIn);
+        graficoBarras.appendChild(dia);
+    });
+}
+
+function criarElementoDia(checkIn) {
+    const dia = document.createElement('div');
+    const barraTrack = document.createElement('div');
+    const barra = document.createElement('div');
+    const dataSpan = document.createElement('span');
+
+    const partesData = checkIn.data.split('-');
+    const ano = Number(partesData[0]);
+    const mes = Number(partesData[1]) - 1;
+    const diaDoMes = Number(partesData[2]);
+
+    const dataDoCheckIn = new Date(ano, mes, diaDoMes);
+    
+    const dataFormatadaCurta = dataDoCheckIn.toLocaleDateString('pt-BR', {
+        day: 'numeric',
+        month: 'short'
+    });
+
+    const infoDoHumor = infoHumores[checkIn.humor];
+
+    barra.style.height = alturaPorHoras[checkIn.horasDormidas];
+    barra.style.backgroundColor = infoDoHumor.corBarra;
+
+    dia.classList.add('dia');
+    barraTrack.classList.add('barra-track');
+    barra.classList.add('barra');
+    dataSpan.classList.add('data');
+
+    barraTrack.appendChild(barra);
+    dia.appendChild(barraTrack);
+    dia.appendChild(dataSpan);
+
+    dataSpan.textContent = dataFormatadaCurta;
+
+    return dia;
+}
+
 atualizarHumorPredominante();
 exibirHistoricoDiario();
+exibirGrafico();
