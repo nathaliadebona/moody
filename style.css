@@ -387,6 +387,22 @@ section#diario {
     color: var(--cor-humor-pessimo);
 }
 
+.btn-editar {
+    margin-top: 0.5rem;
+    margin-right: 0.75rem;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--cor-humor-neutro);
+    font-size: 0.8rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.btn-editar:hover {
+    color: var(--cor-destaque-secundaria);
+}
+
 /* Seção gráfico */
 section#grafico {
     display: flex;

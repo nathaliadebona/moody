@@ -197,8 +197,8 @@ function criarElementoEntrada(entrada, indice) {
 
     article.appendChild(time);
     article.appendChild(paragrafo);
-    article.appendChild(btnExcluir);
     article.appendChild(btnEditar);
+    article.appendChild(btnExcluir);
 
     if (indice % 2 === 0) {
         article.classList.add('roxo');
