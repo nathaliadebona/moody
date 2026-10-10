@@ -6,10 +6,6 @@ Desenvolvido como projeto de aprendizado front-end, com foco em fundamentos: HTM
 
 https://nathaliadebona.github.io/moody/app.html
 
-<img width="1832" height="3646" alt="nathaliadebona github io_moody_app html (2)" src="https://github.com/user-attachments/assets/1d3d9681-33bd-4b04-920c-5e5fd20c6053" />
-<img width="1824" height="1082" alt="nathaliadebona github io_moody_app html" src="https://github.com/user-attachments/assets/89005a69-8214-4097-9e82-1b6cc250e281" />
-<img width="1824" height="1080" alt="nathaliadebona github io_moody_app html (1)" src="https://github.com/user-attachments/assets/34ada356-3acd-44fa-8e74-c5526d891b27" />
-
 ## Funcionalidades
 
 ### Onboarding
@@ -54,7 +50,9 @@ https://nathaliadebona.github.io/moody/app.html
 
 ## Screenshots
 
-*Em breve.*
+<img width="1832" height="3646" alt="nathaliadebona github io_moody_app html (2)" src="https://github.com/user-attachments/assets/1d3d9681-33bd-4b04-920c-5e5fd20c6053" />
+<img width="1824" height="1082" alt="nathaliadebona github io_moody_app html" src="https://github.com/user-attachments/assets/89005a69-8214-4097-9e82-1b6cc250e281" />
+<img width="1824" height="1080" alt="nathaliadebona github io_moody_app html (1)" src="https://github.com/user-attachments/assets/34ada356-3acd-44fa-8e74-c5526d891b27" />
 
 ---
 
